@@ -3,11 +3,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_FORBIDDEN;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class UserRegisterTest {
+public class RegisterTest {
     private User user;
     private UserClient userClient;
     private String token;
@@ -43,7 +44,7 @@ public class UserRegisterTest {
     }
 
     @Test
-    public void duplicateUserCantBeCreate() {
+    public void duplicateUserCantBeCreateTest() {
         ValidatableResponse response = userClient.register(user);
 
         int statusCode = response.extract().statusCode();
@@ -64,11 +65,9 @@ public class UserRegisterTest {
         int secondLoginStatusCode = secondUser.extract().statusCode();
         assertEquals("Status code is incorrect", SC_FORBIDDEN, secondLoginStatusCode);
 
-        Boolean secondSuccess = secondUser.extract().path("success");
+        boolean secondSuccess = secondUser.extract().path("success");
         assertTrue("Duplicate user created", !secondSuccess);
         String message = secondUser.extract().path("message");
         assertEquals("Duplicate user created", UserErrors.CREATE_DUPLICATE_USER, message);
     }
-
-
 }

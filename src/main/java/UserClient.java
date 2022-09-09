@@ -21,10 +21,12 @@ public class UserClient extends BaseClient {
     public ValidatableResponse login(UserCredentials userCredentials) {
         return given()
                 .spec(getSpec())
+                .log().all()
                 .body(userCredentials)
                 .when()
                 .post(USER_LOGIN_PATH)
-                .then();
+                .then()
+                .log().all();
     }
     public ValidatableResponse delete(String token) {
         return given()
