@@ -40,7 +40,7 @@ public class LoginTest {
     }
 
     @Test
-    public void loginWrongCredentialsFailedTest() {
+    public void loginWithWrongCredentialsFailedTest() {
         ValidatableResponse response = userClient.login(UserCredentials.from(user));
         int statusCode = response.extract().statusCode();
         assertEquals("Status code is incorrect", SC_UNAUTHORIZED, statusCode);

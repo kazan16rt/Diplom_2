@@ -39,4 +39,26 @@ public class UserClient extends BaseClient {
                 .then()
                 .log().all();
     }
+    public ValidatableResponse updateUnauthUser(User user) {
+        return given()
+                .log().all()
+                .spec(getSpec())
+                .body(user)
+                .when()
+                .patch(USER_UPDATE_PATH)
+                .then()
+                .log().all();
+    }
+    public ValidatableResponse updateUser(User user, String token) {
+        return given()
+                .log().all()
+                .spec(getSpec())
+                .header("Authorization",
+                        token)
+                .body(user)
+                .when()
+                .patch(USER_UPDATE_PATH)
+                .then()
+                .log().all();
+    }
 }
