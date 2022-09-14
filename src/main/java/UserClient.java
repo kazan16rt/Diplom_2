@@ -39,7 +39,7 @@ public class UserClient extends BaseClient {
                 .then()
                 .log().all();
     }
-    public ValidatableResponse updateUnauthUser(User user) {
+    public ValidatableResponse updateUser(User user) {
         return given()
                 .log().all()
                 .spec(getSpec())
@@ -57,7 +57,7 @@ public class UserClient extends BaseClient {
                         token)
                 .body(user)
                 .when()
-                .patch(USER_UPDATE_PATH)
+                .patch(USER_DELETE_PATH)
                 .then()
                 .log().all();
     }

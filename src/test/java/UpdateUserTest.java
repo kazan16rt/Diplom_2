@@ -31,7 +31,7 @@ public class UpdateUserTest {
 
     @Test
         public void updateUserWithoutAuthoriseFailedTest() {
-        ValidatableResponse response = userClient.updateUnauthUser(defaultUser);
+        ValidatableResponse response = userClient.updateUser(defaultUser);
 
         int statusCode = response.extract().statusCode();
         assertEquals("Status code is incorrect", SC_UNAUTHORIZED, statusCode);
@@ -44,9 +44,8 @@ public class UpdateUserTest {
 
     @Test
     public void updateUserSuccessTest() {
-        userClient.register(defaultUser);
-        ValidatableResponse loginResponse = userClient.login(UserCredentials.from(defaultUser));
-        token = loginResponse.extract().path("accessToken");
+        ValidatableResponse response = userClient.register(defaultUser);
+        token = response.extract().path("accessToken");
         ValidatableResponse updateResponse = userClient.updateUser(changedUser, token);
 
         int statusCode = updateResponse.extract().statusCode();
