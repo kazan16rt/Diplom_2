@@ -67,6 +67,7 @@ public class RegisterTest {
 
         boolean secondSuccess = secondUser.extract().path("success");
         assertTrue("Duplicate user created", !secondSuccess);
+
         String message = secondUser.extract().path("message");
         assertEquals("Duplicate user created", UserErrors.CREATE_DUPLICATE_USER, message);
     }

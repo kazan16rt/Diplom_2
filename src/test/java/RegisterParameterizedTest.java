@@ -13,7 +13,6 @@ public class RegisterParameterizedTest {
 
     private User user;
     private UserClient userClient;
-
     private final String email;
     private final String password;
     private final String name;
@@ -53,6 +52,7 @@ public class RegisterParameterizedTest {
 
         boolean success = response.extract().path("success");
         assertTrue("User without required fields is created", !success);
+
         String message = response.extract().path("message");
         assertEquals("User without required fields is created", UserErrors.CREATE_ERROR_USER, message);
     }

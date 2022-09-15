@@ -38,6 +38,7 @@ public class UpdateUserTest {
 
         boolean success = response.extract().path("success");
         assertTrue("User without authorization is changed", !success);
+
         String message = response.extract().path("message");
         assertEquals("User without authorization is changed", UserErrors.UPDATE_UNAUTHORIZED_USER, message);
     }
