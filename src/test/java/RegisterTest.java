@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class RegisterTest {
     private User user;
@@ -66,7 +65,7 @@ public class RegisterTest {
         assertEquals("Status code is incorrect", SC_FORBIDDEN, secondLoginStatusCode);
 
         boolean secondSuccess = secondUser.extract().path("success");
-        assertTrue("Duplicate user created", !secondSuccess);
+        assertFalse("Duplicate user created", secondSuccess);
 
         String message = secondUser.extract().path("message");
         assertEquals("Duplicate user created", UserErrors.CREATE_DUPLICATE_USER, message);

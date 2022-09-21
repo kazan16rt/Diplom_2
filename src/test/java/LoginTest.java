@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoginTest {
     private User user;
@@ -46,7 +45,7 @@ public class LoginTest {
         assertEquals("Status code is incorrect", SC_UNAUTHORIZED, statusCode);
 
         boolean success = response.extract().path("success");
-        assertTrue("Success login to non-existent user", !success);
+        assertFalse("Success login to non-existent user", success);
 
         String actual = response.extract().path("message");
         assertEquals("Success login to non-existent user", UserErrors.LOGIN_ERROR_USER, actual);

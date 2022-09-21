@@ -4,8 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.apache.http.HttpStatus.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class OrderCreateTest {
     private User user;
@@ -45,7 +44,7 @@ public class OrderCreateTest {
         assertTrue("Order is not created", success);
 
         String status = response.extract().path("order.status");
-        assertEquals("Status must be missing", null, status);
+        assertNull("Status must be missing", status);
     }
 
     @Test
@@ -74,7 +73,7 @@ public class OrderCreateTest {
         assertEquals("Status code is incorrect", SC_BAD_REQUEST, statusCode);
 
         boolean success = responseOrder.extract().path("success");
-        assertTrue("Status must be false", !success);
+        assertFalse("Status must be false", success);
 
         String message = responseOrder.extract().path("message");
         assertEquals("Error text is not expected", UserErrors.INGREDIENTS_MISSING, message);
@@ -92,5 +91,4 @@ public class OrderCreateTest {
         String statusLine = responseOrder.extract().statusLine();
         assertEquals("Status line is not expected", this.statusLine, statusLine);
     }
-
 }

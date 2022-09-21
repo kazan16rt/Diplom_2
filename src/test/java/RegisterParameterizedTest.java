@@ -6,7 +6,7 @@ import org.junit.runners.Parameterized;
 
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(Parameterized.class)
 public class RegisterParameterizedTest {
@@ -51,7 +51,7 @@ public class RegisterParameterizedTest {
         assertEquals("Status code is incorrect", SC_FORBIDDEN, statusCode);
 
         boolean success = response.extract().path("success");
-        assertTrue("User without required fields is created", !success);
+        assertFalse("User without required fields is created", success);
 
         String message = response.extract().path("message");
         assertEquals("User without required fields is created", UserErrors.CREATE_ERROR_USER, message);

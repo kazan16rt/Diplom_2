@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UpdateUserTest {
     private User defaultUser;
@@ -37,7 +36,7 @@ public class UpdateUserTest {
         assertEquals("Status code is incorrect", SC_UNAUTHORIZED, statusCode);
 
         boolean success = response.extract().path("success");
-        assertTrue("User without authorization is changed", !success);
+        assertFalse("User without authorization is changed", success);
 
         String message = response.extract().path("message");
         assertEquals("User without authorization is changed", UserErrors.UPDATE_UNAUTHORIZED_USER, message);
